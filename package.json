@@ -1,0 +1,14 @@
+{
+  "name": "munch",
+  "version": "1.0.0",
+  "description": "An all in one Recipe Platform",
+  "main": "server.js",
+  "scripts": {
+    "start":"node backend/server.js"
+  },
+  "author": "Haris",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
