@@ -1,0 +1,50 @@
+.mealPlanner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.weekPlan {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dayPlan {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+}
+
+.generateButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.generateButton:hover {
+  background-color: #218838;
+}
+
+.shoppingList {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.shoppingList ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.shoppingList li {
+  margin-bottom: 5px;
+}
+

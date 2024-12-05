@@ -1,0 +1,44 @@
+/* Navigation Styles */
+.nav {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+}
+
+.nav-list {
+  display: flex;               /* Flexbox for horizontal layout */
+  justify-content: flex-start; /* Align links to the left */
+  gap: 2rem;                   /* Space between links */
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  list-style-type: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #007bff;
+  transform: scale(1.05);
+}
+
+.nav-link svg {
+  margin-right: 8px;
+  font-size: 1.2rem;  /* Slightly increase icon size for better visibility */
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    flex-direction: row;  /* Maintain horizontal layout on smaller screens */
+    justify-content: center;  /* Center the items */
+  }
+}

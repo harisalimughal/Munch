@@ -1,0 +1,20 @@
+.recipeCard {
+  transition: transform 0.3s ease-in-out;
+}
+
+.recipeCard:hover {
+  transform: translateY(-5px);
+}
+
+.recipeImage {
+  height: 200px;
+  object-fit: cover;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+

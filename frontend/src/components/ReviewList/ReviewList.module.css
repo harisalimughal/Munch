@@ -1,0 +1,18 @@
+.reviewList {
+  margin-top: 20px;
+}
+
+.review {
+  border-bottom: 1px solid #ced4da;
+  padding: 10px 0;
+}
+
+.comment {
+  margin: 10px 0;
+}
+
+.date {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
