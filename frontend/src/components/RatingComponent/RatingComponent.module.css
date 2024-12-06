@@ -1,6 +1,7 @@
 .ratingContainer {
   display: inline-flex;
   gap: 5px;
+  padding-left: 10px;
 }
 
 .star {

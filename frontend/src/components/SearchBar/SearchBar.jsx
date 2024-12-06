@@ -10,18 +10,19 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.searchBar}>
-      <input
-        type="text"
-        className={styles.searchInput}
-        placeholder="Search recipes..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button type="submit" className={styles.searchButton}>
-        Search
-      </button>
-    </form>
+    <form onSubmit={handleSubmit} className={`${styles.searchBar} d-flex`}>
+  <input
+    type="text"
+    className={`${styles.searchInput} form-control`}
+    placeholder="Search recipes..."
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+  />
+  <button type="submit" className={styles.searchButton}>
+    Search
+  </button>
+</form>
+
   );
 };
 

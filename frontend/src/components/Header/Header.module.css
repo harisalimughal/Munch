@@ -1,44 +1,101 @@
-/* Navigation Styles */
+/* Navbar Container */
 .nav {
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #c2185b, #e91e63);
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  position: relative;
 }
 
-.nav-list {
-  display: flex;               /* Flexbox for horizontal layout */
-  justify-content: flex-start; /* Align links to the left */
-  gap: 2rem;                   /* Space between links */
+/* Brand Section */
+.navBrand {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
   margin: 0;
-  padding: 0;
 }
 
-.nav li {
-  list-style-type: none;
+.subtitle {
+  font-size: 12px;
+  margin: 0;
 }
 
-.nav-link {
+/* Navigation Buttons */
+.navButtons {
+  display: flex;
+  gap: 10px;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.navButton {
   display: flex;
   align-items: center;
-  font-weight: 600;
+  background-color: #ffffff;
+  color: #c2185b;
   text-decoration: none;
-  color: #333;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.nav-link:hover {
-  color: #007bff;
-  transform: scale(1.05);
+.navButton:hover {
+  background-color: #ffeb3b;
+  color: #c2185b;
 }
 
-.nav-link svg {
-  margin-right: 8px;
-  font-size: 1.2rem;  /* Slightly increase icon size for better visibility */
+.navIcon {
+  margin-right: 5px;
+  font-size: 18px;
 }
 
-@media (max-width: 768px) {
-  .nav-list {
-    flex-direction: row;  /* Maintain horizontal layout on smaller screens */
-    justify-content: center;  /* Center the items */
+/* Hamburger Menu Button */
+.hamburgerButton {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 650px) {
+  .navButtons {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #e91e63;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .navButtonsOpen {
+    min-height: 200px; /* Adjust based on content */
+    max-height: 200px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .hamburgerButton {
+    display: block;
+  }
+
+  .navButton {
+    justify-content: center;
+    padding: 10px;
+    margin: 5px 5px;
   }
 }

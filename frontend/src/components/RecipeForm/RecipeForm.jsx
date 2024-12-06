@@ -43,6 +43,7 @@ const RecipeForm = ({ initialData, onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.recipeForm}>
+      <h2>Add New Recipe</h2>
       <div className={styles.formGroup}>
         <label htmlFor="title">Title</label>
         <input

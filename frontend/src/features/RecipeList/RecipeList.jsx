@@ -27,7 +27,7 @@ const RecipeList = () => {
             difficulty: 'medium',
             categories: ['Italian', 'Pasta'],
             rating: 4.5,
-            image: '/placeholder.svg?height=200&width=300',
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
           },
           {
             id: '2',
@@ -37,7 +37,49 @@ const RecipeList = () => {
             difficulty: 'easy',
             categories: ['Asian', 'Quick Meals'],
             rating: 4.2,
-            image: '/placeholder.svg?height=200&width=300',
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
+          },
+
+          {
+            id: '3',
+            title: 'Spaghetti Carbonara',
+            description: 'Classic Italian pasta dish',
+            cookingTime: 30,
+            difficulty: 'medium',
+            categories: ['Italian', 'Pasta'],
+            rating: 4.5,
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
+          },
+          {
+            id: '4',
+            title: 'Chicken Stir Fry',
+            description: 'Quick and healthy Asian-inspired dish',
+            cookingTime: 20,
+            difficulty: 'easy',
+            categories: ['Asian', 'Quick Meals'],
+            rating: 4.2,
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
+          },
+
+          {
+            id: '5',
+            title: 'Spaghetti Carbonara',
+            description: 'Classic Italian pasta dish',
+            cookingTime: 30,
+            difficulty: 'medium',
+            categories: ['Italian', 'Pasta'],
+            rating: 4.5,
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
+          },
+          {
+            id: '6',
+            title: 'Chicken Stir Fry',
+            description: 'Quick and healthy Asian-inspired dish',
+            cookingTime: 20,
+            difficulty: 'easy',
+            categories: ['Asian', 'Quick Meals'],
+            rating: 4.2,
+            image: 'https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg',
           },
           // Add more mock recipes here
         ];
@@ -77,18 +119,28 @@ const RecipeList = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className={styles.recipeList}>
-      <h1>Recipes</h1>
-      <div className={styles.searchAndFilter}>
-        <SearchBar onSearch={handleSearch} />
-        <FilterPanel onFilter={handleFilter} />
-      </div>
-      <div className={styles.recipeGrid}>
-        {filteredRecipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
+    <div className={`${styles.recipeList} container`}>
+  <h1 className={styles.text}>Recipes</h1>
+  <div className={styles.searchBarContainer}>
+    <SearchBar onSearch={handleSearch} />
+  </div>
+  <div className={styles.layoutContainer}>
+    {/* Filter Panel */}
+    <div className={`${styles.filterPanel} p-3 rounded`}>
+      <FilterPanel onFilter={handleFilter} />
     </div>
+    
+    {/* Recipe Cards Grid */}
+    <div className={styles.recipeGrid}>
+      {filteredRecipes.map((recipe) => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
   );
 };
 

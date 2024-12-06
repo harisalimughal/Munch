@@ -1,10 +1,18 @@
 .recipeForm {
+  margin-top: 50px !important;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipeForm:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 40px #FF4D6D;
+  
 }
 
 .formGroup {

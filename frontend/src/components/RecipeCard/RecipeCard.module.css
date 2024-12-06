@@ -1,20 +1,92 @@
 .recipeCard {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  height: 400px;
 }
 
 .recipeCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0px 0px 15px #FF4D6D;
 }
 
 .recipeImage {
-  height: 200px;
-  object-fit: cover;
+  width: 100%;
+  height: 40%;
+  border-bottom: 1px solid #ddd;
+}
+
+.cardBody {
+  padding: 20px;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #f62626;
+  margin-left: auto;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.cardText {
+  font-size: 0.9rem;
+  color: rgb(37, 123, 252);
 }
 
 .categoryContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 10px;
+  gap: 4px;
+  margin-bottom: 15px;
+  padding: 2px 4px;
 }
 
+.button {
+  background-color: #f55472;
+  color: white;
+  border: none;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #eb2045;
+  color: white;
+}
+
+/* Media Query for Responsive Design */
+@media screen and (max-width: 768px) {
+  .recipeCard {
+    flex-direction: column;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+
+  .cardText {
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .cardText {
+    font-size: 0.8rem;
+  }
+
+  .btn-primary {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}

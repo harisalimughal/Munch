@@ -18,7 +18,6 @@ const AddRecipe = () => {
 
   return (
     <div className={styles.addRecipeContainer}>
-      <h2>Add New Recipe</h2>
       {error && <p className={styles.error}>{error}</p>}
       <RecipeForm onSubmit={handleSubmit} />
     </div>

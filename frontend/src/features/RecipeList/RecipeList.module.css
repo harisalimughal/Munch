@@ -1,18 +1,40 @@
 .recipeList {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 30px !important;
   padding: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
-.searchAndFilter {
-  display: flex;
-  justify-content: space-between;
+.recipeList h1 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.searchBarContainer {
   margin-bottom: 20px;
 }
 
+.layoutContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filterPanel {
+  flex: 1 0 250px; /* Fixed width for the filter panel */
+  max-width: 300px;
+}
+
 .recipeGrid {
+  flex: 3 1 auto; /* Remaining width for the cards */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
 
+.text
+{
+  font-family: 'Georgia';
+}

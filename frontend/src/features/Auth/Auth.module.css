@@ -1,50 +1,179 @@
+/* Auth.module.css */
+
+/* Full-screen background with the recipe image */
+
 .authContainer {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.authForm {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('https://t3.ftcdn.net/jpg/09/08/95/82/360_F_908958253_FzbMvigDE8GuL3AMe96NSabzK1lSIoAL.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 80px 20px 200px 20px;
+  margin-bottom: -50px;
+  /* background-color: linear-gradient(135deg, #FF8FA3, #FF4D6D); */
+
 }
 
+
+
+
+/* Login form card with gradient background */
+.authFormCard {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 450px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.authFormRegCard {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Hover effect for the card */
+.authFormCard:hover,.authFormRegCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 35px #0066ff;
+}
+
+/* Login heading style */
+.authContainer h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color:  #0d6efd;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Form group styling */
 .formGroup {
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.formGroup label {
-  margin-bottom: 5px;
-  font-weight: bold;
+label {
+  font-size: 1rem;
+  color: #0d6efd;
+  margin-bottom: 8px;
 }
 
-.formGroup input {
-  padding: 8px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Remember me checkbox */
+.formGroup input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Sign In button styling */
 .submitButton {
-  background-color: #007bff;
-  color: white;
+  padding: 12px;
+  background: linear-gradient(90deg, #00bcd4, #007bff);
+  color: #fff;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .submitButton:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #006db3, #008c99);
+  transform: translateY(-2px);
 }
 
-.error {
-  color: #dc3545;
-  margin-top: 10px;
+/* Social login buttons */
+.socialButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
+.socialButtons a {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.socialButtons a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.socialButtons a.facebook {
+  background-color: #3b5998;
+  color: white;
+}
+
+.socialButtons a.google {
+  background-color: #db4437;
+  color: white;
+}
+
+.text
+{
+  margin-top: 15px;
+  color: #0d6efd;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  .authContainer {
+    padding: 10px;
+  }
+
+  .authFormCard {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .authContainer h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .authFormCard {
+    padding: 15px;
+  }
+
+  .authContainer h2 {
+    font-size: 1.75rem;
+  }
+}

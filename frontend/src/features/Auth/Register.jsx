@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from './Auth.module.css';
+import classNames from 'classnames';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -25,8 +26,9 @@ const Register = () => {
 
   return (
     <div className={styles.authContainer}>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} className={styles.authForm}>
+      
+      <form onSubmit={handleSubmit} className={styles.authFormRegCard}>
+        <h2>Register</h2>
         <div className={styles.formGroup}>
           <label htmlFor="name">Name</label>
           <input
@@ -71,13 +73,13 @@ const Register = () => {
         <button type="submit" className={styles.submitButton}>
           Register
         </button>
-      </form>
-      <p>
+        <p className={styles.text}>
         Already have an account? <Link to="/login">Login here</Link>
       </p>
+      </form>
+      
     </div>
   );
 };
 
 export default Register;
-

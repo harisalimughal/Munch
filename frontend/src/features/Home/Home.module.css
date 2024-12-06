@@ -3,17 +3,25 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
+    margin-top: 30px;
   }
   
   .hero {
     text-align: center;
     padding: 80px 0;
-    background: linear-gradient(to right, #ff6b6b, #ff5252);
+    background: linear-gradient(135deg, #590D22, #C9184A);
     color: #fff;
     border-radius: 8px;
     margin-bottom: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero:hover {
+    transform: scale(1.02); /* Slightly enlarge the section */
+    box-shadow: 0px 0px 40px rgb(216, 41, 99); /* Enhance shadow effect */
+}
+
   
   .hero h1 {
     font-size: 3rem;
@@ -27,8 +35,8 @@
   
   .cta {
     display: inline-block;
-    background-color: #fff;
-    color: #ff6b6b;
+    background-color: #FFCCD5;
+    color: #590D22;
     padding: 14px 28px;
     border-radius: 6px;
     font-weight: bold;
@@ -38,8 +46,9 @@
   }
   
   .cta:hover {
-    background-color: #ff5252;
-    color: white;
+    background-color: #fa375b;
+    color: #FFF0F3;
+    box-shadow: 0 0px 10px #FF8FA3;
     transform: scale(1.1);
   }
   
@@ -56,21 +65,25 @@
     background-color: #fff;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
   }
   
   .feature:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02); /* Slightly enlarge the section */
+    box-shadow: 0px 0px 40px rgb(216, 41, 99); /* Enhance shadow effect */
   }
   
   .feature h2 {
     font-size: 1.75rem;
     margin-bottom: 15px;
+    color: #FF4D6D;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .feature p {
     color: #666;
+    
   }
   
   @media (max-width: 768px) {
