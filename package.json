@@ -1,17 +1,31 @@
 {
   "name": "munch",
   "version": "1.0.0",
-  "description": "An all in one Recipe Platform",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js"
+
+    "start": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\" \" npm run client\""
   },
-  "author": "Haris",
+  "author": "Harry",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "express": "^4.21.1",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^9.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.3",
+    "moongoose": "^0.0.5",
+    "moongose": "^1.0.0",
+    "nodeman": "^1.1.2",
+    "nodemon": "^3.1.7"
   }
 }

@@ -5,6 +5,7 @@ An all in one Recipe Platform
 - npm init (install node modules)
 - npm i express (for express)
 - npm start (to run server)
+- npm install -g nodemon (auto-restart)
 
 # Steps/Commands for Frontend
 - bun create vite frontend (for vite react template)
