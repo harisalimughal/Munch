@@ -5,6 +5,7 @@ import CategoryTag from '../../components/CategoryTag/CategoryTag';
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import ReviewList from '../../components/ReviewList/ReviewList';
 import styles from './RecipeDetail.module.css';
+import axios from 'axios';
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -13,38 +14,32 @@ const RecipeDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Mock API call to fetch recipe details
-    const fetchRecipe = async () => {
-      try {
-        // Simulating API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Mock recipe data
-        const mockRecipe = {
-          id: id,
-          title: 'Delicious Pasta',
-          description: 'A quick and easy pasta dish thats perfect for weeknight dinners.',
-          ingredients: ['200g pasta', '100g cheese', '50g butter', 'Salt and pepper to taste'],
-          instructions: 'Cook pasta according to package instructions. In a separate pan, melt butter and add cheese. Drain pasta and mix with the cheese sauce. Season with salt and pepper to taste.',
-          cookingTime: 20,
-          servings: 2,
-          difficulty: 'easy',
-          categories: ['Italian', 'Quick Meals'],
-          tags: ['pasta', 'cheese', 'easy'],
-          images: ['/placeholder.svg?height=400&width=600'],
-          rating: 4.5,
-        };
+   const fetchRecipes = async () => {
+     try {
+       const { data } = await axios.get(`/api/recipes/${id}`);
+       return data;
+     } catch (error) {
+       console.error("Error fetching recipes:", error.message);
+       if (error.response) {
+         console.error("Response Data:", error.response.data);
+         console.error("Status Code:", error.response.status);
+       }
+     }
+   };
 
-        setRecipe(mockRecipe);
-        setLoading(false);
+
+  useEffect(() => {
+   const getRecipes = async () => {
+      try {
+        const fetchedRecipes = await fetchRecipes(); // Await fetchRecipes
+        setRecipe(fetchedRecipes); // Update the recipes state
+        setLoading(false); // Stop loading
       } catch (err) {
-        setError('Failed to fetch recipe');
-        setLoading(false);
+        setError("Failed to fetch recipes"); // Handle error
+        setLoading(false); // Stop loading even if there's an error
       }
     };
-
-    fetchRecipe();
+    getRecipes();
   }, [id]);
 
   const handleAddReview = (newReview) => {
@@ -59,7 +54,7 @@ const RecipeDetail = () => {
   return (
     <div className={styles.recipeDetail}>
       <h1 className={styles.recipeTitle}>{recipe.title}</h1>
-      <img src={recipe.images[0]} alt={recipe.title} className={styles.recipeImage} />
+      <img src={recipe.image} alt={recipe.title} className={styles.recipeImage} />
       <div className={styles.recipeInfo}>
         <p className={styles.recipeDescription}>{recipe.description}</p>
         <div className={styles.recipeMetadata}>

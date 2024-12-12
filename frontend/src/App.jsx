@@ -16,42 +16,40 @@ import './App.css';
 
 function App() {
   return (
-    
-      <AuthProvider>
-        
-          <div className="App">
-            <Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/recipes" element={<RecipeList />} />
-                <Route path="/recipe/:id" element={<RecipeDetail />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route
-                  path="/add-recipe"
-                  element={
-                    <ProtectedRoute>
-                      <AddRecipe />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/meal-planner"
-                  element={
-                    <ProtectedRoute>
-                      <MealPlanner />
-           <div>Add Recipe</div>
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-      
-      </AuthProvider>
-    
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes" element={<RecipeList />} />
+            <Route path="/recipes/:id" element={<RecipeDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/meal-planner" element={<MealPlanner />} />
+            <Route path="/add-recipe" element={<AddRecipe />} />
+            <Route
+              path="/add-recipe"
+              element={
+                <ProtectedRoute>
+                  <AddRecipe />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/meal-planner"
+              element={
+                <ProtectedRoute>
+                  <MealPlanner />
+                  <div>Add Recipe</div>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 }
 

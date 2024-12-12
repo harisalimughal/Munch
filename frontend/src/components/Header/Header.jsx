@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaPlusCircle, FaCalendarAlt, FaBars } from 'react-icons/fa'; // Importing icons
+import {
+  FaHome,
+  FaPlusCircle,
+  FaCalendarAlt,
+  FaBars,
+  FaUser,
+} from "react-icons/fa"; // Importing icons
 import styles from './Header.module.css'; // Import the CSS module file
+import { NavDropdown, Navbar,Nav } from 'react-bootstrap';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +29,9 @@ function Header() {
       </button>
       {/* Navigation Links */}
       <div
-        className={`${styles.navButtons} ${isMenuOpen ? styles.navButtonsOpen : ''}`}
+        className={`${styles.navButtons} ${
+          isMenuOpen ? styles.navButtonsOpen : ""
+        }`}
       >
         <Link to="/" className={styles.navButton}>
           <FaHome className={styles.navIcon} /> Home
@@ -33,6 +42,21 @@ function Header() {
         <Link to="/meal-planner" className={styles.navButton}>
           <FaCalendarAlt className={styles.navIcon} /> Meal Planner
         </Link>
+          <Link to="/login" className={styles.navButton}>
+            <FaUser className={styles.navIcon} /> Login
+          </Link>
+
+          <Link
+            to="/login"
+            className={styles.navButton}
+            onClick={() => {
+              localStorage.removeItem("userInfo");
+              alert("User Logout Successfully, Now Login");
+            }}
+          >
+            <FaUser className={styles.navIcon} /> Logout
+          </Link>
+      
       </div>
     </nav>
   );

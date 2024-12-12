@@ -9,6 +9,29 @@
   color: #fff;
   position: relative;
 }
+/* Custom styles for the Dropdown */
+.customDropdown .dropdown-toggle {
+  background-color: transparent; /* Remove background color */
+  color: inherit; /* Use parent text color */
+  border: none; /* Remove border */
+  padding: 0; /* Adjust padding if needed */
+}
+
+.customDropdown .dropdown-menu {
+  background-color: transparent; /* Transparent dropdown menu */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+}
+
+.customDropdown .dropdown-item {
+  color: inherit; /* Inherit parent color */
+  background-color: transparent; /* Remove item background */
+}
+
+.customDropdown .dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Optional hover effect */
+}
+
 
 /* Brand Section */
 .navBrand {
