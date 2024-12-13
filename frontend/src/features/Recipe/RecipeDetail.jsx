@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import RatingComponent from '../../components/RatingComponent/RatingComponent';
-import CategoryTag from '../../components/CategoryTag/CategoryTag';
-import ReviewForm from '../../components/ReviewForm/ReviewForm';
-import ReviewList from '../../components/ReviewList/ReviewList';
-import styles from './RecipeDetail.module.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import RatingComponent from "../../components/RatingComponent/RatingComponent";
+import CategoryTag from "../../components/CategoryTag/CategoryTag";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
+import ReviewList from "../../components/ReviewList/ReviewList";
+import styles from "./RecipeDetail.module.css";
+import axios from "axios";
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -14,32 +14,47 @@ const RecipeDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-   const fetchRecipes = async () => {
-     try {
-       const { data } = await axios.get(`/api/recipes/${id}`);
-       return data;
-     } catch (error) {
-       console.error("Error fetching recipes:", error.message);
-       if (error.response) {
-         console.error("Response Data:", error.response.data);
-         console.error("Status Code:", error.response.status);
-       }
-     }
-   };
-
+  const fetchRecipe = async () => {
+    try {
+      const { data } = await axios.get(`/api/recipes/${id}`);
+      console.log(data);
+      return data;
+      
+    } catch (error) {
+      console.error("Error fetching recipe:", error.message);
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Status Code:", error.response.status);
+      }
+      throw error;
+    }
+  };
 
   useEffect(() => {
-   const getRecipes = async () => {
+    const getRecipe = async () => {
       try {
-        const fetchedRecipes = await fetchRecipes(); // Await fetchRecipes
-        setRecipe(fetchedRecipes); // Update the recipes state
-        setLoading(false); // Stop loading
+        const fetchedRecipe = await fetchRecipe();
+
+        // Split ingredients into an array if it's a single string
+        if (
+          fetchedRecipe.ingredients &&
+          typeof fetchedRecipe.ingredients === "string"
+        ) {
+          fetchedRecipe.ingredients = fetchedRecipe.ingredients.split(",");
+        }
+
+        setRecipe(fetchedRecipe);
+        console.log("Fetched Recipe:", fetchedRecipe);
+
+        setLoading(false);
       } catch (err) {
-        setError("Failed to fetch recipes"); // Handle error
-        setLoading(false); // Stop loading even if there's an error
+        console.error("Error in RecipeDetail:", err);
+        setError("Failed to fetch recipe");
+        setLoading(false);
       }
     };
-    getRecipes();
+
+    getRecipe();
   }, [id]);
 
   const handleAddReview = (newReview) => {
@@ -54,7 +69,11 @@ const RecipeDetail = () => {
   return (
     <div className={styles.recipeDetail}>
       <h1 className={styles.recipeTitle}>{recipe.title}</h1>
-      <img src={recipe.image} alt={recipe.title} className={styles.recipeImage} />
+      <img
+        src={recipe.image}
+        alt={recipe.title}
+        className={styles.recipeImage}
+      />
       <div className={styles.recipeInfo}>
         <p className={styles.recipeDescription}>{recipe.description}</p>
         <div className={styles.recipeMetadata}>
@@ -78,7 +97,9 @@ const RecipeDetail = () => {
         </div>
         <div className={styles.tags}>
           {recipe.tags.map((tag, index) => (
-            <span key={index} className={styles.tag}>#{tag}</span>
+            <span key={index} className={styles.tag}>
+              #{tag}
+            </span>
           ))}
         </div>
       </div>
@@ -91,6 +112,24 @@ const RecipeDetail = () => {
         </ul>
         <h2>Instructions</h2>
         <p className={styles.instructions}>{recipe.instructions}</p>
+        {recipe.nutrition && Object.keys(recipe.nutrition).length > 0 && (
+          <div className={styles.nutritionSection}>
+            <h2>Nutrition (mg)</h2>
+            <ul className={styles.nutritionList}>
+              {Object.entries(recipe.nutrition).map(
+                ([key, value]) =>
+                  value !== null && (
+                    <li key={key}>
+                      <strong>
+                        {key.charAt(0).toUpperCase() + key.slice(1)}:
+                      </strong>{" "}
+                      {value}
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+        )}
       </div>
       <div className={styles.reviewSection}>
         <h2>Reviews</h2>
@@ -102,4 +141,3 @@ const RecipeDetail = () => {
 };
 
 export default RecipeDetail;
-

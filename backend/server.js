@@ -30,10 +30,10 @@ app.use(errorHandler);
 
 
 
-// app.get("/api/recipes/:id", (req, res) => {
-//   const recipe = recipes.find((n) => n.id === req.params.id);
-//   res.json(recipe);
-// });
+app.get("/api/recipes/:id", (req, res) => {
+  const recipe = recipes.find((n) => n.id === req.params.id);
+  res.json(recipe);
+});
 
 const PORT = process.env.PORT || 5000;
 

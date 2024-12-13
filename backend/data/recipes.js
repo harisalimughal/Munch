@@ -26,12 +26,7 @@ const recipes = [
     title: "Delicious Pasta",
     description:
       "A quick and easy pasta dish thats perfect for weeknight dinners.",
-    ingredients: [
-      "200g pasta",
-      "100g cheese",
-      "50g butter",
-      "Salt and pepper to taste",
-    ],
+    ingredients: ["200g pasta,100g cheese,50g butter,Salt and pepper to taste"],
     instructions:
       "Cook pasta according to package instructions. In a separate pan, melt butter and add cheese. Drain pasta and mix with the cheese sauce. Season with salt and pepper to taste.",
     cookingTime: 20,

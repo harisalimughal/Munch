@@ -15,6 +15,16 @@
   
 }
 
+.imagePreview img {
+  max-width: 100%; /* Ensures the image fits within its container */
+  max-height: 200px; /* Limits the height of the image */
+  object-fit: cover; /* Ensures the image is scaled proportionally */
+  border: 1px solid #ddd; /* Optional: adds a border for aesthetics */
+  border-radius: 5px; /* Optional: rounds the corners */
+  margin-top: 10px; /* Adds some spacing above the image */
+}
+
+
 .formGroup {
   margin-bottom: 20px;
 }
@@ -47,4 +57,15 @@
 .submitButton:hover {
   background-color: #0056b3;
 }
+.success {
+  color: green; /* Green text for success */
+  font-size: 1.2rem; /* Slightly larger text */
+  text-align: center; /* Center aligns the message */
+  margin-top: 15px; /* Adds space above the message */
+  background-color: #e6ffed; /* Light green background for emphasis */
+  padding: 10px; /* Adds padding around the text */
+  border: 1px solid #b0e0a0; /* Optional border for definition */
+  border-radius: 5px; /* Rounds corners for aesthetics */
+}
+
 

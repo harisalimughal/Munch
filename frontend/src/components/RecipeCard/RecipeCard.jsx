@@ -24,7 +24,7 @@ const RecipeCard = ({ recipe }) => {
               <CategoryTag key={index} category={category} />
             ))}
           </div>
-          <Link to={`/recipes/${recipe.id}`} className={styles.button}>
+          <Link to={`/recipes/${recipe._id}`} className={styles.button}>
             View Recipe
           </Link>
         </div>

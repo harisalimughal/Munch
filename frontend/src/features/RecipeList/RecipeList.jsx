@@ -6,24 +6,37 @@ import styles from './RecipeList.module.css';
 import axios from "axios";
 
 const RecipeList = () => {
+  
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchRecipes = async () => {
-    try {
-      const { data } = await axios.get("/api/recipes");
-      return data;
+const fetchRecipes = async () => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const token = userInfo?.token;
+
+  try {
+    const { data } = await axios.get("http://localhost:5000/api/recipes/", {
       
-    } catch (error) {
-      console.error("Error fetching recipes:", error.message);
-      if (error.response) {
-        console.error("Response Data:", error.response.data);
-        console.error("Status Code:", error.response.status);
-      }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    return data;
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("userInfo"); // Clear invalid user info
+      alert("Session expired. Please log in again.");
+      window.location.href = "/login"; // Redirect to login page
     }
-  };
+    throw error; // Re-throw for other cases
+  }
+};
+
+
+
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -41,6 +54,7 @@ const RecipeList = () => {
     getRecipes(); // Call async function inside useEffect
   }, []);
 
+
   const handleSearch = (query) => {
     const filtered = recipes.filter(
       (recipe) =>
@@ -50,18 +64,23 @@ const RecipeList = () => {
     setFilteredRecipes(filtered);
   };
 
-  const handleFilter = (filters) => {
-    const filtered = recipes.filter((recipe) => {
-      return (
-        recipe.cookingTime <= filters.cookingTime[1] &&
-        (filters.difficulty === "" ||
-          recipe.difficulty === filters.difficulty) &&
-        (filters.category === "" ||
-          recipe.categories.includes(filters.category))
-      );
-    });
-    setFilteredRecipes(filtered);
-  };
+ const handleFilter = (filters) => {
+   const filtered = recipes.filter((recipe) => {
+     return (
+       recipe.cookingTime <= filters.cookingTime[1] &&
+       (filters.difficulty === "" ||
+         recipe.difficulty.toLowerCase() ===
+           filters.difficulty.toLowerCase()) &&
+       (filters.category === "" ||
+         recipe.categories.some(
+           (category) =>
+             category.toLowerCase() === filters.category.toLowerCase()
+         ))
+     );
+   });
+   setFilteredRecipes(filtered);
+ };
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;

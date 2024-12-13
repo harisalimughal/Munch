@@ -28,6 +28,14 @@ const recipeSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    nutrition: {
+      calories: { type: Number, default: null }, // Optional: Calories in kcal
+      protein: { type: Number, default: null }, // Optional: Protein in grams
+      fat: { type: Number, default: null }, // Optional: Fat in grams
+      carbs: { type: Number, default: null }, // Optional: Carbs in grams
+      fiber: { type: Number, default: null }, // Optional: Fiber in grams
+      sugar: { type: Number, default: null }, // Optional: Sugar in grams
+    },
   },
   {
     timestamps: true,

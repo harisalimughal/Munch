@@ -47,6 +47,7 @@ const createRecipe = async (req, res) => {
     tags,
     image,
     rating,
+    nutrition, // Add nutrition to destructured request body
   } = req.body;
 
   // Validate required fields
@@ -67,6 +68,7 @@ const createRecipe = async (req, res) => {
 
   try {
     const newRecipe = new Recipe({
+      user: req.user._id,
       title,
       description,
       ingredients,
@@ -78,6 +80,14 @@ const createRecipe = async (req, res) => {
       tags,
       image,
       rating,
+      nutrition: {
+        calories: nutrition?.calories || null,
+        protein: nutrition?.protein || null,
+        fat: nutrition?.fat || null,
+        carbs: nutrition?.carbs || null,
+        fiber: nutrition?.fiber || null,
+        sugar: nutrition?.sugar || null,
+      }, // Include optional nutrition details
     });
 
     const savedRecipe = await newRecipe.save(); // Save to DB
@@ -88,6 +98,7 @@ const createRecipe = async (req, res) => {
       .json({ message: "Failed to create recipe", error: error.message });
   }
 };
+
 
 // @desc    Update a recipe by ID
 // @route   PUT /api/recipes/:id
@@ -111,6 +122,7 @@ const updateRecipe = async (req, res) => {
       .json({ message: "Failed to update recipe", error: error.message });
   }
 };
+
 
 // @desc    Delete a recipe by ID
 // @route   DELETE /api/recipes/:id
