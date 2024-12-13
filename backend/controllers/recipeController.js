@@ -143,10 +143,66 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+
+
+const addReview = async (req, res) => {
+  const { rating, comment } = req.body;
+
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+
+    if (!recipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    if (!Array.isArray(recipe.reviews)) {
+      recipe.reviews = []; // Initialize reviews if not present
+    }
+
+    const alreadyReviewed = recipe.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+
+    if (alreadyReviewed) {
+      return res.status(400).json({ message: "Recipe already reviewed" });
+    }
+
+    const review = {
+      user: req.user._id,
+      rating: Number(rating),
+      comment,
+    };
+
+    recipe.reviews.push(review); // Add review to array
+
+    recipe.rating =
+      recipe.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      recipe.reviews.length; // Update average rating
+
+    await recipe.save(); // Persist changes to database
+
+    res.status(201).json({
+      message: "Review added",
+      reviews: recipe.reviews,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to add review", error: error.message });
+  }
+};
+
+
+
+
+
+
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  addReview,
 };

@@ -57,9 +57,8 @@ const RecipeDetail = () => {
     getRecipe();
   }, [id]);
 
-  const handleAddReview = (newReview) => {
-    setReviews([...reviews, newReview]);
-    // Here you would typically make an API call to save the review
+  const handleAddReview = (updatedReviews) => {
+    setRecipe((prevRecipe) => ({ ...prevRecipe, reviews: updatedReviews }));
   };
 
   if (loading) return <div>Loading...</div>;
@@ -133,8 +132,8 @@ const RecipeDetail = () => {
       </div>
       <div className={styles.reviewSection}>
         <h2>Reviews</h2>
-        <ReviewForm onSubmit={handleAddReview} />
-        <ReviewList reviews={reviews} />
+        <ReviewForm recipeId={recipe._id} onSubmit={handleAddReview} />
+        <ReviewList reviews={recipe.reviews} />
       </div>
     </div>
   );

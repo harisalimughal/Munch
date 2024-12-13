@@ -79,7 +79,6 @@ const RecipeForm = ({ initialData }) => {
         }
       );
 
-      console.log("Recipe created:", data);
       setSuccess(true);
       setFormData({
         title: "",

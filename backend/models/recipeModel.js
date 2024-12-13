@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const reviewSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Reference to user
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    date: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+
 // Define the Recipe schema
 const recipeSchema = new mongoose.Schema(
   {
@@ -36,6 +46,7 @@ const recipeSchema = new mongoose.Schema(
       fiber: { type: Number, default: null }, // Optional: Fiber in grams
       sugar: { type: Number, default: null }, // Optional: Sugar in grams
     },
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,
