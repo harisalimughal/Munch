@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./Auth.module.css";
-import classNames from "classnames";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import axios from "axios";
-import {Form} from "react-bootstrap";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,14 +15,15 @@ const Register = () => {
   );
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [picMessage, setPicMessage] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { register, error } = useAuth();
+  const [successMessage, setSuccessMessage] = useState(""); // For success messages
+  const { register, error: authError } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
+
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       setMessage("Password don't Match");
@@ -43,8 +42,20 @@ const Register = () => {
           { name, pic, email, password },
           config
         );
+
+        // Store the user info in local storage
         localStorage.setItem("userInfo", JSON.stringify(data));
+
         setLoading(false);
+
+        // Set the success message
+        setSuccessMessage("User registered successfully!");
+
+        // Optionally, reset the form fields
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
       } catch (error) {
         setLoading(false); // Stop loading in case of error
         setError(
@@ -52,66 +63,18 @@ const Register = () => {
         );
       }
     }
+
     register(name, email, password);
+
+    // Navigate to home if no error
     if (!error) {
-      navigate("/");
+      navigate("/"); // or redirect to another page
     }
   };
-
-  const postDetails = async (pics) => {
-    if (!pics) {
-      setMessage("Please Select an Image");
-      return;
-    }
-    setPicMessage(null);
-
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      try {
-        const data = new FormData();
-        data.append("file", pics);
-        data.append("upload_preset", "harismunch");
-        data.append("cloud_name", "harismunch");
-
-        const response = await fetch(
-          "https://api.cloudinary.com/v1_1/harismunch/image/upload",
-          {
-            method: "post",
-            body: data,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const cloudinaryData = await response.json();
-        console.log("Cloudinary response:", cloudinaryData);
-        setPic(cloudinaryData.url.toString());
-      } catch (error) {
-        console.error("Upload error:", error);
-        setPicMessage("Image upload failed");
-      }
-    } else {
-      setPicMessage("Please Select an Image");
-    }
-  };
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/");
-  //   }
-  // }, [history, userInfo]);
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-
-  //   if (password !== confirmpassword) {
-  //     setMessage("Passwords do not match");
-  //   } else dispatch(register(name, email, password, pic));
-  // };
 
   return (
     <div className={styles.authContainer}>
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {authError && <ErrorMessage variant="danger">{authError}</ErrorMessage>}
       {loading && <Loading />}
 
       <form onSubmit={handleSubmit} className={styles.authFormRegCard}>
@@ -157,13 +120,8 @@ const Register = () => {
           />
         </div>
 
-        <label htmlFor="pic">Profile Picture</label>
-        <input
-          type="file"
-          id="pic"
-          accept="image/*"
-          onChange={(e) => postDetails(e.target.files[0])}
-        />
+        {/* Display success message */}
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
 
         {error && <p className={styles.error}>{error}</p>}
         <button type="submit" className={styles.submitButton}>
