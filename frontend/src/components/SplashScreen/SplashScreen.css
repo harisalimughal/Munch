@@ -1,0 +1,37 @@
+/* Target only the h2 inside .splashContainer */
+.splashContainer {
+    margin: 0;
+    background: linear-gradient(135deg, #590D22, #C9184A);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splashContainer h2 {
+    color: #F2F5FE;
+    text-align: center;
+    font-size: 200px;
+    line-height: 1;
+    font-family: 'Rajdhani', sans-serif;
+    background: -webkit-linear-gradient(
+        transparent,
+        transparent
+    ),
+    url(https://th.bing.com/th/id/OIP.YvGP2vwdg9eXZukpfTm9LQAAAA?w=417&h=626&rs=1&pid=ImgDetMain) repeat;
+    background-size: 200px auto;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: background 10s infinite linear;
+}
+
+/* Keyframes remain the same */
+@keyframes background {
+    from {
+        background-position: 0 0%;
+    }
+
+    to {
+        background-position: 0 -200px;
+    }
+}

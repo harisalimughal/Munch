@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import styles from "./Auth.module.css";
 import axios from "axios";
 import Loading from "../../components/Loading";
@@ -10,8 +10,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,10 +32,13 @@ const Login = () => {
         config
       );
 
-    
+      // Save user info to localStorage
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      navigate("/"); // Navigate to home or another page
+
+      // Redirect to the original location or home
+      const redirectPath = location.state?.from?.pathname || "/home";
+      navigate(redirectPath, { replace: true });
     } catch (error) {
       setLoading(false); // Stop loading in case of error
       setError(
@@ -45,8 +49,8 @@ const Login = () => {
 
   return (
     <div className={styles.authContainer}>
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage> }
-      {loading && <Loading />} 
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {loading && <Loading />}
       <form onSubmit={handleSubmit} className={styles.authFormCard}>
         <h2>Log In</h2>
         <div className={styles.formGroup}>

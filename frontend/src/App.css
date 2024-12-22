@@ -30,3 +30,17 @@ body.dark-mode {
   border-color: #0a58ca;
 }
 
+h1 {
+    color: #F2F5FE;
+    line-height: 1;
+    font-family: 'Rajdhani', sans-serif;
+    background: -webkit-linear-gradient(
+        transparent,
+        transparent
+    ),
+    url(https://th.bing.com/th/id/OIP.YvGP2vwdg9eXZukpfTm9LQAAAA?w=417&h=626&rs=1&pid=ImgDetMain) repeat;
+    background-size: 200px auto;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: background 10s infinite linear;
+}

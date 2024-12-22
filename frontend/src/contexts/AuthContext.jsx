@@ -1,47 +1,32 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
-
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const login = (email, password) => {
-    // Mock login functionality
-    if (email === 'user@example.com' && password === 'password') {
-      setUser({ id: 1, email, name: 'John Doe' });
-      setError(null);
-    } else {
-      setError('Invalid email or password');
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      setCurrentUser(userInfo);
     }
-  };
+  }, []);
 
-  const register = (name, email, password) => {
-    // Mock register functionality
-    if (email !== 'user@example.com') {
-      setUser({ id: 2, email, name });
-      setError(null);
-    } else {
-      setError('Email already in use');
-    }
+  const login = (user) => {
+    setCurrentUser(user);
+    localStorage.setItem("userInfo", JSON.stringify(user));
   };
 
   const logout = () => {
-    // Mock logout functionality
-    setUser(null);
-    setError(null);
+    setCurrentUser(null);
+    localStorage.removeItem("userInfo");
   };
 
-  const value = {
-    user,
-    error,
-    login,
-    register,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ currentUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
+export const useAuth = () => useContext(AuthContext);
