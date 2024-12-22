@@ -29,3 +29,19 @@
   background-color: #0056b3;
 }
 
+.error {
+  color: red;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: white;
+  background-color: #28a745;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+

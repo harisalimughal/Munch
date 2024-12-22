@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 import * as THREE from "three"; // Required for Vanta.js
-import FOOD from "vanta/dist/vanta.birds.min";
+import BIRDS from "vanta/dist/vanta.birds.min";
 import Footer from '../../components/Footer/Footer';
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
 
       setTimeout(() => {
         try {
-          vantaEffect.current = FOODS({
+          vantaEffect.current = BIRDS({
             el: vantaRef.current, // Target container
             THREE, // Provide the Three.js instance
             mouseControls: true,
