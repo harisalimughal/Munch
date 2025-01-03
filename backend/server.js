@@ -7,33 +7,22 @@ const recipeRoutes = require("./routes/recipeRoutes");
 const { errorHandler, notFound } = require("./middlewares/errorMiddleware");
 const cors = require("cors");
 
+// Initialize Express application
 const app = express();
 dotenv.config();
 connectDB();
 app.use(express.json());
 app.use(cors());
 
-// app.get('/', (req,res)=>{
-//  res.send("Api is running")
-// })
-
-// app.get("/api/recipes", (req, res) => {
-// res.json(recipes);
-// });
-
-app.use("/api/users", userRoutes);
-app.use("/api/recipes", recipeRoutes);
-app.use(notFound);
-app.use(errorHandler);
-
-
-
-
-
-app.get("/api/recipes/:id", (req, res) => {
+// API route handlers
+app.use("/api/users", userRoutes);  // Handle requests to /api/users with userRoutes
+app.use("/api/recipes", recipeRoutes); // Handle requests to /api/recipes with recipeRoutes (Find all recipes)
+app.get("/api/recipes/:id", (req, res) => {              // Find recipe by id
   const recipe = recipes.find((n) => n.id === req.params.id);
   res.json(recipe);
 });
+app.use(notFound); // Middleware to handle 404 not found errors
+app.use(errorHandler); // Middleware to handle other errors
 
 const PORT = process.env.PORT || 5000;
 

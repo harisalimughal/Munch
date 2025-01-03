@@ -33,7 +33,7 @@ function Header() {
           isMenuOpen ? styles.navButtonsOpen : ""
         }`}
       >
-        <Link to="/" className={styles.navButton}>
+        <Link to="/home" className={styles.navButton}>
           <FaHome className={styles.navIcon} /> Home
         </Link>
         <Link to="/add-recipe" className={styles.navButton}>
