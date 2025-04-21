@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const recipes = require("./data/recipes");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
@@ -7,23 +8,35 @@ const recipeRoutes = require("./routes/recipeRoutes");
 const { errorHandler, notFound } = require("./middlewares/errorMiddleware");
 const cors = require("cors");
 
-// Initialize Express application
+// Initialize app
 const app = express();
 dotenv.config();
 connectDB();
+
 app.use(express.json());
 app.use(cors());
 
-// API route handlers
-app.use("/api/users", userRoutes);  // Handle requests to /api/users with userRoutes
-app.use("/api/recipes", recipeRoutes); // Handle requests to /api/recipes with recipeRoutes (Find all recipes)
-app.get("/api/recipes/:id", (req, res) => {              // Find recipe by id
+// API routes
+app.use("/api/users", userRoutes);
+app.use("/api/recipes", recipeRoutes);
+app.get("/api/recipes/:id", (req, res) => {
   const recipe = recipes.find((n) => n.id === req.params.id);
   res.json(recipe);
 });
-app.use(notFound); // Middleware to handle 404 not found errors
-app.use(errorHandler); // Middleware to handle other errors
+
+// ====== Serve React frontend ======
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.resolve(__dirname, "../frontend/dist");
+  app.use(express.static(frontendPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+}
+
+// Error handlers
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
