@@ -18,7 +18,7 @@ app.use(cors());
 
 // API routes
 app.get("/", (req, res) => {
-  res.send("API is running...");
+  res.send("Backend is running...");
 });
 
 app.use("/api/users", userRoutes);
