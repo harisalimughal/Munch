@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(cors());
 
 // API routes
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 app.use("/api/users", userRoutes);
 app.use("/api/recipes", recipeRoutes);
 app.get("/api/recipes/:id", (req, res) => {
