@@ -6,7 +6,7 @@
   },
   "deploy": {
     "startCommand": "cd backend && node server.js",
-    "healthcheckPath": "/",
+    "healthcheckPath": "/api/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "always"
   }

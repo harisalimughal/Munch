@@ -16,10 +16,13 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
+
 // API routes
-app.get("/", (req, res) => {
-  res.send("Backend is running...");
+app.get("/api/health", (req, res) => {
+  res.send("Healthy...");
 });
+
+
 
 app.use("/api/users", userRoutes);
 app.use("/api/recipes", recipeRoutes);
