@@ -38,7 +38,7 @@ const Register = () => {
         };
         setLoading(true);
         const { data } = await axios.post(
-          "http://localhost:5000/api/users/",
+          "/api/users/",
           { name, pic, email, password },
           config
         );

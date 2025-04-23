@@ -17,7 +17,7 @@ const fetchRecipes = async () => {
   const token = userInfo?.token;
 
   try {
-    const { data } = await axios.get("http://localhost:5000/api/recipes/", {
+    const { data } = await axios.get("/api/recipes/", {
       
       headers: {
         Authorization: `Bearer ${token}`,

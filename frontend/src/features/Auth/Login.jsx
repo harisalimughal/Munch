@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +27,9 @@ const Login = () => {
 
       setLoading(true); // Show loading spinner
 
+
       const { data } = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "/api/users/login",
         { email, password },
         config
       );
